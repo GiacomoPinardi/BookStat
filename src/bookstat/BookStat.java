@@ -18,17 +18,18 @@ import javafx.stage.Stage;
  *
  * @author giacomo
  */
-public class BookStat extends Application{
+public class BookStat {
 
     public static void main(String[] args) {
         
         GraphicInterface GUI = new GraphicInterface();
         GUI.show();
         
-        launch(args);
+        
+        //launch(args);
         
     }
-        
+     
     public void start(Stage stage) throws FileNotFoundException {
         
         String fileName = "WarAndPeace";
