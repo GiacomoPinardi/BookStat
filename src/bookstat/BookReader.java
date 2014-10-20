@@ -20,7 +20,7 @@ public class BookReader {
     int tot;
     Scanner lettore = null;   
         
-    public void read (String fileName) throws FileNotFoundException {
+    public double[] read (File f) throws FileNotFoundException {
         String s;
         char c;
         freq = new int[26];
@@ -31,8 +31,7 @@ public class BookReader {
             perc[i] = 0;
         }
         tot = 0;
-        
-        File f = new File(fileName);
+                
         lettore = new Scanner (f);
         
         while (lettore.hasNextLine()) {
@@ -52,9 +51,6 @@ public class BookReader {
             }
         }  
         
-    }
-    
-    public double[] getPercentage () {
         return this.perc;
     }
     
