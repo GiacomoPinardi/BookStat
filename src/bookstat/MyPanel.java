@@ -51,12 +51,16 @@ public class MyPanel extends JPanel{
         this.g2 = (Graphics2D) g;        
         this.drawAxis(Color.red, 3);
         
+        // se non viene passato una seconda lista valida, poiche' l'utente non ha selezionato un secondo file, bisogna disegnare solo
+        // le statistiche relative al primo file, altrimenti ad entrambi
+        
         if (s2 == null) {
             this.drawBars(this.s1);
         }
         else {
-            //this.drawBars(this.s1, this.s2);
+            this.drawBars(this.s1, this.s2);
         }
+        
     }
     
     private void drawAxis (Color c, int lineWidth) {        
@@ -110,11 +114,17 @@ public class MyPanel extends JPanel{
             }
         }        
     }
-    
-    /*
+        
     public void drawBars (double[] v1, double[] v2) {
+        double[] t = new double[v1.length + v2.length];
+
+        for (int i = 0; i < v1.length; i++) {
+            t[i*2] = v1[i];
+            t[i*2+1] = v2[i];
+        }
+        
         // bars: number of bars
-        int bars = v.length; 
+        int bars = t.length; 
         if (bars * 4 > w) {
             System.out.println("ERRORE: Troppe barre.");
         }
@@ -132,18 +142,27 @@ public class MyPanel extends JPanel{
                 int uly;
                 
                 //uly = (int) (v[i] * (h/2 / 100));
-                uly = (int) (v[i] * ((h - pxFromBottom) / 100));
+                uly = (int) (t[i] * ((h - pxFromBottom) / 100));
                 
                 // disegno la barra
-                this.drawBar(i*(bw+1), y(uly), bw, uly);
+                Color c = null;
+                if (i%2 == 0) {
+                    c = Color.BLUE;
+                }
+                else {
+                    c = Color.RED;
+                }
+                this.drawBar(i*(bw+1), y(uly), bw, uly, c);
                 // disegno la lettera corrsipondente alla barra, 'w/70' indica i px da aggiungere per centrare la lettera, in rapporto a l'estensione di w
                 //g2.drawString(String.valueOf(Character.toChars(letter)), i*(bw+1) + w/70, y(-pxFromBottom/2), (w/100)*3);
                 this.drawSrting(String.valueOf(Character.toChars(letter)),(int) i*(bw+1) + w/70, (int) y(-pxFromBottom/2), (int) (w/100)*3);
-                letter ++;
+                if (i%2 == 0) {
+                    letter ++;
+                }                
             }
         }        
     }
-    */
+    
     
     // ritorna le coordinate x nel nostro sistema di riferimento cartesiano
     private int x (int x) {

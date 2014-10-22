@@ -20,6 +20,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class GraphicInterface extends javax.swing.JFrame {
     
     final JFileChooser fc = new JFileChooser();
+    FileFilter filter = new FileNameExtensionFilter(".txt file","txt");
+        
     
     File f1 = null;
     File f2 = null;
@@ -31,6 +33,7 @@ public class GraphicInterface extends javax.swing.JFrame {
     public GraphicInterface() {
         initComponents();
         this.setTitle("Book Stats");
+        fc.setFileFilter(filter);
     }
 
     @SuppressWarnings("unchecked")
@@ -45,6 +48,9 @@ public class GraphicInterface extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +91,24 @@ public class GraphicInterface extends javax.swing.JFrame {
 
         jLabel5.setText("Enable auto zoom");
 
+        jLabel6.setText("Select width and height");
+
+        jButton4.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jButton4.setText("Unselect");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        jButton5.setText("Unselect");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,7 +122,9 @@ public class GraphicInterface extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addGap(50, 50, 50)
-                        .addComponent(jButton1))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,14 +132,19 @@ public class GraphicInterface extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(27, 27, 27)
-                                .addComponent(jButton3))))
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton5))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(137, 137, 137)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,16 +154,20 @@ public class GraphicInterface extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton4))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jButton3))
-                .addGap(35, 35, 35)
+                    .addComponent(jButton3)
+                    .addComponent(jButton5))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -141,46 +176,53 @@ public class GraphicInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        FileFilter filter = new FileNameExtensionFilter(".txt file","txt");
-        fc.setFileFilter(filter);
-        
-        fc.showOpenDialog(rootPane);
-        
+        fc.showOpenDialog(rootPane);        
         f1 = fc.getSelectedFile();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-                
-        if (f1 != null) {
-            try {
-            
-                this.runGraphicInterface(br.read(f1));            
+                        
+            try {            
+                if (f1 != null) {                
+                    if (f2 != null) {
+                        this.runGraphicInterface(br.read(f1), br.read(f2));
+                    }
+                    else {
+                        this.runGraphicInterface(br.read(f1), null);
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(rootPane, "Please select at least the fisrt file!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
             
             } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(rootPane, "File not found!", "ERROR", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        else {
-            JOptionPane.showMessageDialog(rootPane, "Please select at least one file!", "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-        
+            }        
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        fc.showOpenDialog(rootPane);        
+        f2 = fc.getSelectedFile();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        f1 = null;
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        f2 = null;
+    }//GEN-LAST:event_jButton5ActionPerformed
        
-    private void runGraphicInterface(double[] bookStats) {               
+    private void runGraphicInterface(double[] book1Stats, double[] book2Stats) {               
         
         JFrame f = new JFrame("Prova");
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // Inutile?: f.setSize(50,50);
         f.setVisible(true);
-        f.setTitle(frameTitle);
+        f.setTitle(frameTitle);        
         
-        MyPanel p = new MyPanel(1500, 800, bookStats, null);   
+        MyPanel p = new MyPanel(1500, 800, book1Stats, book2Stats);
         
         f.add(p);
         f.pack();  
@@ -191,10 +233,13 @@ public class GraphicInterface extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
 }
