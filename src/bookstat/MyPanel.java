@@ -23,13 +23,17 @@ public class MyPanel extends JPanel{
     
     private final int w;
     private final int h;
+    
     private final int pxFromBottom;
+    
     private Graphics2D g2;
     
     private double s1[] = null;
     private double s2[] = null;
     
-    public MyPanel(int width, int height, double[] stats1, double[] stats2) {
+    private boolean showKey;
+    
+    public MyPanel(int width, int height, double[] stats1, double[] stats2, boolean showKey) {
         setBorder(BorderFactory.createLineBorder(Color.black));
         this.w = width;
         this.h = height;
@@ -37,6 +41,8 @@ public class MyPanel extends JPanel{
         
         this.s1 = stats1;
         this.s2 = stats2;
+        
+        this.showKey = showKey;
     }
 
     @Override

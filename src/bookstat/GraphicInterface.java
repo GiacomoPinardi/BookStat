@@ -53,8 +53,8 @@ public class GraphicInterface extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,11 +114,12 @@ public class GraphicInterface extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Enable key");
-
         jComboBox1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "320px : 240px", "640px : 360px", "640px : 480px", "1280px : 720px", "1600px : 900px", "1920px : 1080px" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "320 x 240 px", "640 x 360 px", "640 x 480 px", "1280 x 720 px", "1600 x 900 px", "1920 x 1080 px", "2560 x 1440 px" }));
         jComboBox1.setSelectedIndex(3);
+
+        jCheckBox2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jCheckBox2.setText("Enable key (legend)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -151,15 +152,14 @@ public class GraphicInterface extends javax.swing.JFrame {
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel6)
                         .addGap(37, 37, 37)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel7)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCheckBox2)
+                            .addComponent(jLabel5))))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -183,11 +183,11 @@ public class GraphicInterface extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jCheckBox2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -244,7 +244,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         
         this.setWidthAndHeight();
         
-        MyPanel p = new MyPanel(this.width, this.height, book1Stats, book2Stats);
+        MyPanel p = new MyPanel(this.width, this.height, book1Stats, book2Stats, jCheckBox2.isSelected());
         
         f.add(p);
         f.pack();  
@@ -252,9 +252,7 @@ public class GraphicInterface extends javax.swing.JFrame {
     } 
     
     private void setWidthAndHeight () {
-        int idx = jComboBox1.getSelectedIndex();
-        
-        switch (idx) {
+        switch (jComboBox1.getSelectedIndex()) {
             case 0:
                 this.width = 320;
                 this.height = 240;
@@ -279,6 +277,10 @@ public class GraphicInterface extends javax.swing.JFrame {
                 this.width = 1920;
                 this.height = 1080;
                 break;
+            case 6:
+                this.width = 2560;
+                this.height = 1440;
+                break;
         }
     }
     
@@ -288,6 +290,7 @@ public class GraphicInterface extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -295,6 +298,5 @@ public class GraphicInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }
