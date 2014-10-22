@@ -79,7 +79,8 @@ public class MyPanel extends JPanel{
     }
     
     private void drawSrting (String s, int x, int y, int width) {
-        g2.setFont(new Font("Liberation Mono", Font.PLAIN, width));
+        g2.setColor(Color.BLACK);
+        g2.setFont(new Font("Liberation Mono", Font.PLAIN, width));        
         g2.drawString(s, x, y);
     }
     
@@ -106,10 +107,14 @@ public class MyPanel extends JPanel{
                 uly = (int) (v[i] * ((h - pxFromBottom) / 100));
                 
                 // disegno la barra
-                this.drawBar(i*(bw+1), y(uly), bw, uly, Color.BLACK);
+                this.drawBar(i*(bw+1), y(uly), bw, uly, Color.BLUE);
                 // disegno la lettera corrsipondente alla barra
-                this.drawSrting(String.valueOf(Character.toChars(letter)), (int) i*(bw+1), (int) y((-pxFromBottom/2)-(w/100*1)), (int) (w/100)*3);
+                this.drawSrting(String.valueOf(Character.toChars(letter)), (int) (i*(bw+1) + bw/4), (int) y((-pxFromBottom/2)-(h/100*2)), (int) (w/100)*3);
                 letter ++;
+                
+                // disegno i separatori
+                g2.setColor(Color.BLACK);
+                g2.drawLine(i*(bw+1), y(0), i*(bw+1), y(-pxFromBottom));
             }
         }        
     }
@@ -152,11 +157,13 @@ public class MyPanel extends JPanel{
                     col = Color.RED;
                 }
                 this.drawBar(i*(bw+1), y(uly), bw, uly, col);
-                // disegno la lettera corrsipondente alla barra, 'w/70' indica i px da aggiungere per centrare la lettera, in rapporto a l'estensione di w
-                //g2.drawString(String.valueOf(Character.toChars(letter)), i*(bw+1) + w/70, y(-pxFromBottom/2), (w/100)*3);
-                this.drawSrting(String.valueOf(Character.toChars(letter)),(int) i*(bw+1), (int) y((-pxFromBottom/2)-(w/100*1)), (int) (w/100)*3);
-                if (i%2 == 1) {
+                // disegno la lettera corrsipondente alla barra
+                if (i%2 == 0) {
+                    this.drawSrting(String.valueOf(Character.toChars(letter)),(int) i*(bw+1) + (bw/2), (int) y((-pxFromBottom/2)-(h/100*2)), (int) (w/100)*3);
                     letter ++;
+                    
+                    g2.setColor(Color.BLACK);
+                    g2.drawLine(i*(bw+1), y(0), i*(bw+1), y(-pxFromBottom));
                 }                
             }
         }        
