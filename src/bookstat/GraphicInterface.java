@@ -192,7 +192,7 @@ public class GraphicInterface extends javax.swing.JFrame {
                     }
                 }
                 else {
-                    JOptionPane.showMessageDialog(rootPane, "Please select at least the fisrt file!", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(rootPane, "Please select at least the first file!", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
             
             } catch (FileNotFoundException ex) {

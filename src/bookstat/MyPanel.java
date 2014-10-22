@@ -154,7 +154,7 @@ public class MyPanel extends JPanel{
                 this.drawBar(i*(bw+1), y(uly), bw, uly, col);
                 // disegno la lettera corrsipondente alla barra, 'w/70' indica i px da aggiungere per centrare la lettera, in rapporto a l'estensione di w
                 //g2.drawString(String.valueOf(Character.toChars(letter)), i*(bw+1) + w/70, y(-pxFromBottom/2), (w/100)*3);
-                this.drawSrting(String.valueOf(Character.toChars(letter)),(int) i*(bw+1) + w/70, (int) y(-pxFromBottom/2), (int) (w/100)*3);
+                this.drawSrting(String.valueOf(Character.toChars(letter)),(int) i*(bw+1), (int) y((-pxFromBottom/2)-(w/100*1)), (int) (w/100)*3);
                 if (i%2 == 1) {
                     letter ++;
                 }                
