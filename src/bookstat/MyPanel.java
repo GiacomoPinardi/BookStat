@@ -107,9 +107,8 @@ public class MyPanel extends JPanel{
                 
                 // disegno la barra
                 this.drawBar(i*(bw+1), y(uly), bw, uly, Color.BLACK);
-                // disegno la lettera corrsipondente alla barra, 'w/70' indica i px da aggiungere per centrare la lettera, in rapporto a l'estensione di w
-                //g2.drawString(String.valueOf(Character.toChars(letter)), i*(bw+1) + w/70, y(-pxFromBottom/2), (w/100)*3);
-                this.drawSrting(String.valueOf(Character.toChars(letter)),(int) i*(bw+1) + w/70, (int) y((-pxFromBottom/2)-(w/100*1)), (int) (w/100)*3);
+                // disegno la lettera corrsipondente alla barra
+                this.drawSrting(String.valueOf(Character.toChars(letter)), (int) i*(bw+1), (int) y((-pxFromBottom/2)-(w/100*1)), (int) (w/100)*3);
                 letter ++;
             }
         }        
@@ -145,18 +144,18 @@ public class MyPanel extends JPanel{
                 uly = (int) (t[i] * ((h - pxFromBottom) / 100));
                 
                 // disegno la barra
-                Color c = null;
+                Color col;
                 if (i%2 == 0) {
-                    c = Color.BLUE;
+                    col = Color.BLUE;
                 }
                 else {
-                    c = Color.RED;
+                    col = Color.RED;
                 }
-                this.drawBar(i*(bw+1), y(uly), bw, uly, c);
+                this.drawBar(i*(bw+1), y(uly), bw, uly, col);
                 // disegno la lettera corrsipondente alla barra, 'w/70' indica i px da aggiungere per centrare la lettera, in rapporto a l'estensione di w
                 //g2.drawString(String.valueOf(Character.toChars(letter)), i*(bw+1) + w/70, y(-pxFromBottom/2), (w/100)*3);
                 this.drawSrting(String.valueOf(Character.toChars(letter)),(int) i*(bw+1) + w/70, (int) y(-pxFromBottom/2), (int) (w/100)*3);
-                if (i%2 == 0) {
+                if (i%2 == 1) {
                     letter ++;
                 }                
             }
