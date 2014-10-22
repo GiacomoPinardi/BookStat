@@ -49,7 +49,7 @@ public class MyPanel extends JPanel{
         super.paintComponent(g);       
 
         this.g2 = (Graphics2D) g;        
-        this.drawAxis(Color.red, 3);
+        this.drawAxis();
         
         // se non viene passato una seconda lista valida, poiche' l'utente non ha selezionato un secondo file, bisogna disegnare solo
         // le statistiche relative al primo file, altrimenti ad entrambi
@@ -63,9 +63,9 @@ public class MyPanel extends JPanel{
         
     }
     
-    private void drawAxis (Color c, int lineWidth) {        
-        g2.setColor(c);
-        g2.setStroke(new BasicStroke(lineWidth));
+    private void drawAxis () {        
+        g2.setColor(Color.BLACK);
+        g2.setStroke(new BasicStroke(h/100*0.38f));
         // x axis
         g2.drawLine(x(- w/2), y(0), x(w/2), y(0));
         //arrows

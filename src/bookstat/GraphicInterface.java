@@ -21,14 +21,16 @@ public class GraphicInterface extends javax.swing.JFrame {
     
     final JFileChooser fc = new JFileChooser();
     FileFilter filter = new FileNameExtensionFilter(".txt file","txt");
-        
-    
+            
     File f1 = null;
     File f2 = null;
     
     private BookReader br = new BookReader();
     
     String frameTitle = null;
+    
+    int width;
+    int height;
     
     public GraphicInterface() {
         initComponents();
@@ -51,6 +53,8 @@ public class GraphicInterface extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,7 +80,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
-        jLabel3.setText("If you want make a comparison, select also the second book:");
+        jLabel3.setText("If you want make a comparison, also select the second book:");
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jLabel4.setText("Select the second book:");
@@ -91,7 +95,8 @@ public class GraphicInterface extends javax.swing.JFrame {
 
         jLabel5.setText("Enable auto zoom");
 
-        jLabel6.setText("Select width and height");
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jLabel6.setText("Width and height:");
 
         jButton4.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         jButton4.setText("Unselect");
@@ -108,6 +113,12 @@ public class GraphicInterface extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
+
+        jLabel7.setText("Enable key");
+
+        jComboBox1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "320px : 240px", "640px : 360px", "640px : 480px", "1280px : 720px", "1600px : 900px", "1920px : 1080px" }));
+        jComboBox1.setSelectedIndex(3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,7 +154,12 @@ public class GraphicInterface extends javax.swing.JFrame {
                         .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel6)))
+                        .addComponent(jLabel6)
+                        .addGap(37, 37, 37)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel7)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -164,10 +180,14 @@ public class GraphicInterface extends javax.swing.JFrame {
                     .addComponent(jButton3)
                     .addComponent(jButton5))
                 .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
@@ -222,12 +242,45 @@ public class GraphicInterface extends javax.swing.JFrame {
         f.setVisible(true);
         f.setTitle(frameTitle);        
         
-        MyPanel p = new MyPanel(1500, 800, book1Stats, book2Stats);
+        this.setWidthAndHeight();
+        
+        MyPanel p = new MyPanel(this.width, this.height, book1Stats, book2Stats);
         
         f.add(p);
         f.pack();  
         
-    }    
+    } 
+    
+    private void setWidthAndHeight () {
+        int idx = jComboBox1.getSelectedIndex();
+        
+        switch (idx) {
+            case 0:
+                this.width = 320;
+                this.height = 240;
+                break;
+            case 1:
+                this.width = 640;
+                this.height = 360;
+                break;
+            case 2:
+                this.width = 640;
+                this.height = 480;
+                break;
+            case 3:
+                this.width = 1280;
+                this.height = 720;
+                break;
+            case 4:
+                this.width = 1600;
+                this.height = 900;
+                break;
+            case 5:
+                this.width = 1920;
+                this.height = 1080;
+                break;
+        }
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -235,11 +288,13 @@ public class GraphicInterface extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     // End of variables declaration//GEN-END:variables
 }
