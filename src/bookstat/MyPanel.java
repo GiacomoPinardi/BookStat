@@ -68,7 +68,9 @@ public class MyPanel extends JPanel{
         // le statistiche relative al primo file, altrimenti ad entrambi
         
         // disegno la legenda (key)
-        this.drawKey(filename[0], filename[1]);
+        if (showKey) {
+            this.drawKey(filename[0], filename[1]);
+        }
         
         if (s2 == null) {
             this.drawBars(this.s1);
@@ -90,8 +92,11 @@ public class MyPanel extends JPanel{
     }
     
     private void drawKey (String name1, String name2) {
-        this.drawSrting(name1, x(100), y((h/2) - pxFromBottom), (int) (w/100)*3);
-        this.drawSrting(name2, x(300), y((h/2) - pxFromBottom), (int) (w/100)*3);
+        this.drawSrting(name1, (w/100)*5, y(h - (2 * pxFromBottom)), (int) (w/100)*3);
+        this.drawBar((int) ((w/100)*2), y((int) (h - (1.5*pxFromBottom))), ((w/100)*2), ((w/100)*2), Color.BLUE);
+        this.drawSrting(name2, (w/100)*55, y(h - (2 * pxFromBottom)), (int) (w/100)*3);
+        this.drawBar((int) ((w/100)*52), y((int) (h - (1.5*pxFromBottom))), ((w/100)*2), ((w/100)*2), Color.RED);
+        
     }
     
     private void drawBar (int x, int y, int width, int height, Color color) {
