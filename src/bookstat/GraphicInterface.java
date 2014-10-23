@@ -27,6 +27,8 @@ public class GraphicInterface extends javax.swing.JFrame {
     
     private BookReader br = new BookReader();
     
+    String[] filename = null;
+    
     String frameTitle = null;
     
     int width;
@@ -35,6 +37,7 @@ public class GraphicInterface extends javax.swing.JFrame {
     public GraphicInterface() {
         initComponents();
         this.setTitle("Book Stats");
+        filename = new String[2];
         fc.setFileFilter(filter);
     }
 
@@ -115,8 +118,8 @@ public class GraphicInterface extends javax.swing.JFrame {
         });
 
         jComboBox1.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "320 x 240 px", "640 x 360 px", "640 x 480 px", "1280 x 720 px", "1600 x 900 px", "1920 x 1080 px", "2560 x 1440 px" }));
-        jComboBox1.setSelectedIndex(3);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "320 x 240 px", "500 x 500 px", "640 x 360 px", "640 x 480 px", "1280 x 720 px", "1600 x 900 px", "1920 x 1080 px", "2560 x 1440 px" }));
+        jComboBox1.setSelectedIndex(4);
 
         jCheckBox2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox2.setText("Enable key (legend)");
@@ -201,14 +204,18 @@ public class GraphicInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-                        
+                       
             try {            
                 if (f1 != null) {                
                     if (f2 != null) {
                         this.runGraphicInterface(br.read(f1), br.read(f2));
+                        filename[0] = f1.getName();
+                        filename[1] = f2.getName();
                     }
                     else {
                         this.runGraphicInterface(br.read(f1), null);
+                        filename[0] = f1.getName();
+                        filename[1] = "Not Selected";
                     }
                 }
                 else {
@@ -236,7 +243,7 @@ public class GraphicInterface extends javax.swing.JFrame {
        
     private void runGraphicInterface(double[] book1Stats, double[] book2Stats) {               
         
-        JFrame f = new JFrame("Prova");
+        JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         // Inutile?: f.setSize(50,50);
         f.setVisible(true);
@@ -244,7 +251,7 @@ public class GraphicInterface extends javax.swing.JFrame {
         
         this.setWidthAndHeight();
         
-        MyPanel p = new MyPanel(this.width, this.height, book1Stats, book2Stats, jCheckBox2.isSelected());
+        MyPanel p = new MyPanel(this.width, this.height, book1Stats, book2Stats, jCheckBox2.isSelected(), filename);
         
         f.add(p);
         f.pack();  
@@ -258,26 +265,29 @@ public class GraphicInterface extends javax.swing.JFrame {
                 this.height = 240;
                 break;
             case 1:
+                this.width = 500;
+                this.height = 500;
+            case 2:
                 this.width = 640;
                 this.height = 360;
                 break;
-            case 2:
+            case 3:
                 this.width = 640;
                 this.height = 480;
                 break;
-            case 3:
+            case 4:
                 this.width = 1280;
                 this.height = 720;
                 break;
-            case 4:
+            case 5:
                 this.width = 1600;
                 this.height = 900;
                 break;
-            case 5:
+            case 6:
                 this.width = 1920;
                 this.height = 1080;
                 break;
-            case 6:
+            case 7:
                 this.width = 2560;
                 this.height = 1440;
                 break;

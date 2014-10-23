@@ -211,17 +211,18 @@
           <Font name="Dialog" size="12" style="0"/>
         </Property>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
+          <StringArray count="8">
             <StringItem index="0" value="320 x 240 px"/>
-            <StringItem index="1" value="640 x 360 px"/>
-            <StringItem index="2" value="640 x 480 px"/>
-            <StringItem index="3" value="1280 x 720 px"/>
-            <StringItem index="4" value="1600 x 900 px"/>
-            <StringItem index="5" value="1920 x 1080 px"/>
-            <StringItem index="6" value="2560 x 1440 px"/>
+            <StringItem index="1" value="500 x 500 px"/>
+            <StringItem index="2" value="640 x 360 px"/>
+            <StringItem index="3" value="640 x 480 px"/>
+            <StringItem index="4" value="1280 x 720 px"/>
+            <StringItem index="5" value="1600 x 900 px"/>
+            <StringItem index="6" value="1920 x 1080 px"/>
+            <StringItem index="7" value="2560 x 1440 px"/>
           </StringArray>
         </Property>
-        <Property name="selectedIndex" type="int" value="3"/>
+        <Property name="selectedIndex" type="int" value="4"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox2">

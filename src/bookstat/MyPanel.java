@@ -25,6 +25,9 @@ public class MyPanel extends JPanel{
     private final int h;
     
     private final int pxFromBottom;
+    private final int pxFromTop;
+    
+    String[] filename;
     
     private Graphics2D g2;
     
@@ -33,16 +36,20 @@ public class MyPanel extends JPanel{
     
     private boolean showKey;
     
-    public MyPanel(int width, int height, double[] stats1, double[] stats2, boolean showKey) {
+    public MyPanel(int width, int height, double[] stats1, double[] stats2, boolean showKey, String filename[]) {
         setBorder(BorderFactory.createLineBorder(Color.black));
         this.w = width;
         this.h = height;
-        this.pxFromBottom = (int) ((h/100)*6);   
+        
+        this.pxFromBottom = (int) ((h/100)*6);  
+        this.pxFromTop = this.pxFromBottom;
         
         this.s1 = stats1;
         this.s2 = stats2;
         
         this.showKey = showKey;
+        
+        this.filename = filename;
     }
 
     @Override
@@ -59,6 +66,9 @@ public class MyPanel extends JPanel{
         
         // se non viene passato una seconda lista valida, poiche' l'utente non ha selezionato un secondo file, bisogna disegnare solo
         // le statistiche relative al primo file, altrimenti ad entrambi
+        
+        // disegno la legenda (key)
+        this.drawKey(filename[0], filename[1]);
         
         if (s2 == null) {
             this.drawBars(this.s1);
@@ -77,6 +87,11 @@ public class MyPanel extends JPanel{
         //arrows
         g2.drawLine(x(w/2), y(0), w - (w*5)/100, y(0) + (h*2)/100);
         g2.drawLine(x(w/2), y(0), w - (w*5)/100 , y(0) - (h*2)/100);
+    }
+    
+    private void drawKey (String name1, String name2) {
+        this.drawSrting(name1, x(100), y((h/2) - pxFromBottom), (int) (w/100)*3);
+        this.drawSrting(name2, x(300), y((h/2) - pxFromBottom), (int) (w/100)*3);
     }
     
     private void drawBar (int x, int y, int width, int height, Color color) {
@@ -151,7 +166,6 @@ public class MyPanel extends JPanel{
                 // indica il valore della y nel classico sistema cartesiano con O al centro della finestra
                 int uly;
                 
-                //uly = (int) (v[i] * (h/2 / 100));
                 uly = (int) (t[i] * ((h - pxFromBottom) / 100));
                 
                 // disegno la barra
