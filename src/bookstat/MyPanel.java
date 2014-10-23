@@ -36,7 +36,9 @@ public class MyPanel extends JPanel{
     
     private boolean showKey;
     
-    public MyPanel(int width, int height, double[] stats1, double[] stats2, boolean showKey, String filename[]) {
+    private boolean autoZoom;
+    
+    public MyPanel(int width, int height, double[] stats1, double[] stats2, boolean showKey, String filename[], boolean autoZoom) {
         setBorder(BorderFactory.createLineBorder(Color.black));
         this.w = width;
         this.h = height;
@@ -50,6 +52,8 @@ public class MyPanel extends JPanel{
         this.showKey = showKey;
         
         this.filename = filename;
+        
+        this.autoZoom = autoZoom;
     }
 
     @Override
@@ -64,14 +68,13 @@ public class MyPanel extends JPanel{
         this.g2 = (Graphics2D) g;        
         this.drawAxis();
         
-        // se non viene passato una seconda lista valida, poiche' l'utente non ha selezionato un secondo file, bisogna disegnare solo
-        // le statistiche relative al primo file, altrimenti ad entrambi
-        
         // disegno la legenda (key)
         if (showKey) {
             this.drawKey(filename[0], filename[1]);
         }
         
+        // se non viene passato una seconda lista valida, poiche' l'utente non ha selezionato un secondo file, bisogna disegnare solo
+        // le statistiche relative al primo file, altrimenti ad entrambi
         if (s2 == null) {
             this.drawBars(this.s1);
         }
@@ -124,13 +127,22 @@ public class MyPanel extends JPanel{
             // inizializzo letter a 97 (che equivale al carattere 'a')
             int letter = 97;
             
+            // se autoZoom e' abilitato, cambiano le proporzioni
+            double unit;            
+            if (autoZoom) {                    
+                double highest = this.highestValue(v);
+                unit = (h-(2.5*pxFromBottom)) / highest;
+            }
+            else {
+                unit = ((h - pxFromBottom) / 100);
+            }
+            
             for (int i = 0; i < bars; i++) {
                 // uly: upper left y: 
                 // indica il valore della y nel classico sistema cartesiano con O al centro della finestra
                 int uly;
                 
-                //uly = (int) (v[i] * (h/2 / 100));
-                uly = (int) (v[i] * ((h - pxFromBottom) / 100));
+                uly = (int) (v[i] * unit);
                 
                 // disegno la barra
                 this.drawBar(i*(bw+1), y(uly), bw, uly, Color.BLUE);
@@ -166,12 +178,22 @@ public class MyPanel extends JPanel{
             // inizializzo letter a 97 (che equivale al carattere 'a')
             int letter = 97;
             
+            // se autoZoom e' abilitato, cambiano le proporzioni
+            double unit;            
+            if (autoZoom) {                    
+                double highest = this.highestValue(t);
+                unit = (h-(2.5*pxFromBottom)) / highest;
+            }
+            else {
+                unit = ((h - pxFromBottom) / 100);
+            }
+            
             for (int i = 0; i < bars; i++) {
                 // uly: upper left y: 
                 // indica il valore della y nel classico sistema cartesiano con O al centro della finestra
                 int uly;
                 
-                uly = (int) (t[i] * ((h - pxFromBottom) / 100));
+                uly = (int) (t[i] * unit);
                 
                 // disegno la barra
                 Color col;
@@ -192,6 +214,16 @@ public class MyPanel extends JPanel{
                 }                
             }
         }        
+    }
+    
+    private double highestValue(double[] v) {
+        double highest = 0;
+        for (int i = 0; i < v.length; i++) {
+            if (highest < v[i]) {
+                highest = v[i];
+            }
+        }
+        return highest;
     }
     
     
