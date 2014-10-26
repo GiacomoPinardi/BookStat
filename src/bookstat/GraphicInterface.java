@@ -259,6 +259,10 @@ public class GraphicInterface extends javax.swing.JFrame {
                         filename[0] = f1.getName();
                         filename[1] = "No file selected";
                     }
+                    
+                    // controllo che il nome dei file non sia troppo lungo
+                    this.filenameLenghtControl(filename);
+                    
                 }
                 else {
                     JOptionPane.showMessageDialog(rootPane, "Please select at least the first file!", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -289,7 +293,7 @@ public class GraphicInterface extends javax.swing.JFrame {
     private void runGraphicInterface(double[] book1Stats, double[] book2Stats) {               
         
         JFrame f = new JFrame();
-        f.setTitle("Output - BookStat");
+        f.setTitle("Output - Book Stat");
         
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         f.setVisible(true);       
@@ -303,6 +307,20 @@ public class GraphicInterface extends javax.swing.JFrame {
         
     } 
     
+    private void filenameLenghtControl (String[] f) {
+        for (int i = 0; i < f.length; i++) {
+            if (f[i].length() > 21) {
+            String tmp = f[i];
+            f[i] = "";
+                for (int k = 0; k < 22; k++) {
+                    f[i] = f[i] + tmp.charAt(k);
+                }
+                f[i] = f[i] + "...";
+                this.filename[i] = f[i];
+            }
+        }
+    }
+    
     private void setWidthAndHeight () {
         switch (jComboBox1.getSelectedIndex()) {
             case 0:
@@ -312,6 +330,7 @@ public class GraphicInterface extends javax.swing.JFrame {
             case 1:
                 this.width = 500;
                 this.height = 500;
+                break;
             case 2:
                 this.width = 640;
                 this.height = 360;
