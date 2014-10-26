@@ -66,7 +66,7 @@ public class MyPanel extends JPanel{
         super.paintComponent(g);       
 
         this.g2 = (Graphics2D) g;        
-        this.drawAxis();
+        this.drawAxes();
         
         // disegno la legenda (key)
         if (showKey) {
@@ -83,7 +83,7 @@ public class MyPanel extends JPanel{
         }        
     }
     
-    private void drawAxis () {        
+    private void drawAxes () {        
         g2.setColor(Color.BLACK);
         g2.setStroke(new BasicStroke(h/100*0.38f));
         // x axis
@@ -91,6 +91,10 @@ public class MyPanel extends JPanel{
         //arrows
         g2.drawLine(x(w/2), y(0), w - (w*5)/100, y(0) + (h*2)/100);
         g2.drawLine(x(w/2), y(0), w - (w*5)/100 , y(0) - (h*2)/100);
+        
+        // y axis (coming soon)
+        //g2.drawLine(x(- w/2), y(0), x(- w/2), pxFromBottom);
+        //g2.drawLine(x(- w/2), y(h), (w*5)/100, y(h) + (h*2)/100);
     }
     
     private void drawKey (String name1, String name2) {
