@@ -80,8 +80,7 @@ public class MyPanel extends JPanel{
         }
         else {
             this.drawBars(this.s1, this.s2);
-        }
-        
+        }        
     }
     
     private void drawAxis () {        
@@ -95,9 +94,9 @@ public class MyPanel extends JPanel{
     }
     
     private void drawKey (String name1, String name2) {
-        this.drawSrting(name1, (w/100)*5, y(h - (2 * pxFromBottom)), (int) (w/100)*3);
+        this.drawSrting(name1, (w/100)*5, y(h - (2 * pxFromBottom)), (int) (w/100)*3, Color.BLACK);
         this.drawBar((int) ((w/100)*2), y((int) (h - (1.5*pxFromBottom))), ((w/100)*2), ((w/100)*2), Color.BLUE);
-        this.drawSrting(name2, (w/100)*55, y(h - (2 * pxFromBottom)), (int) (w/100)*3);
+        this.drawSrting(name2, (w/100)*55, y(h - (2 * pxFromBottom)), (int) (w/100)*3, Color.BLACK);
         this.drawBar((int) ((w/100)*52), y((int) (h - (1.5*pxFromBottom))), ((w/100)*2), ((w/100)*2), Color.RED);
         
     }
@@ -107,11 +106,11 @@ public class MyPanel extends JPanel{
         g2.fillRect(x, y, width, height);
     }
     
-    private void drawSrting (String s, int x, int y, int width) {
-        g2.setColor(Color.BLACK);
+    private void drawSrting (String s, int x, int y, int width, Color c) {
+        g2.setColor(c);
         g2.setFont(new Font("Liberation Mono", Font.PLAIN, width));        
         g2.drawString(s, x, y);
-    }
+    }   
     
     public void drawBars (double[] v) {
         // bars: number of bars
@@ -147,9 +146,9 @@ public class MyPanel extends JPanel{
                 // disegno la barra
                 this.drawBar(i*(bw+1), y(uly), bw, uly, Color.BLUE);
                 // disegno la lettera corrsipondente alla barra
-                this.drawSrting(String.valueOf(Character.toChars(letter)), (int) (i*(bw+1) + bw/4), (int) y((-pxFromBottom/2)-(h/100*2)), (int) (w/100)*3);
+                this.drawSrting(String.valueOf(Character.toChars(letter)), (int) (i*(bw+1) + bw/4), (int) y((-pxFromBottom/2)-(h/100*2)), (int) (w/100)*3, Color.BLACK);
                 letter ++;
-                
+                                
                 // disegno i separatori
                 g2.setColor(Color.BLACK);
                 g2.drawLine(i*(bw+1), y(0), i*(bw+1), y(-pxFromBottom));
@@ -204,9 +203,10 @@ public class MyPanel extends JPanel{
                     col = Color.RED;
                 }
                 this.drawBar(i*(bw+1), y(uly), bw, uly, col);
+                                
                 // disegno la lettera corrsipondente alla barra
                 if (i%2 == 0) {
-                    this.drawSrting(String.valueOf(Character.toChars(letter)),(int) i*(bw+1) + (bw/2), (int) y((-pxFromBottom/2)-(h/100*2)), (int) (w/100)*3);
+                    this.drawSrting(String.valueOf(Character.toChars(letter)),(int) i*(bw+1) + (bw/2), (int) y((-pxFromBottom/2)-(h/100*2)), (int) (w/100)*3, Color.BLACK);
                     letter ++;
                     
                     g2.setColor(Color.BLACK);

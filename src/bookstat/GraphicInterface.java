@@ -125,7 +125,7 @@ public class GraphicInterface extends javax.swing.JFrame {
 
         jCheckBox2.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         jCheckBox2.setSelected(true);
-        jCheckBox2.setText("Enable key (legend)");
+        jCheckBox2.setText("Visible key (legend)");
 
         jLabel7.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         jLabel7.setText("Now selected:");
@@ -231,7 +231,7 @@ public class GraphicInterface extends javax.swing.JFrame {
                 .addComponent(jCheckBox2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
